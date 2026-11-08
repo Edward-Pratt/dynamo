@@ -1,0 +1,52 @@
+{
+  "settings": {
+    "price_per_kwh": {
+      "label": "Electricity price per kWh",
+      "description": "In your currency's main unit, e.g. 0.245 for 24.5p. A new price applies from the moment you set it; past costs keep the price they were counted at."
+    },
+    "currency": {
+      "label": "Currency symbol",
+      "description": "Shown in front of costs, e.g. £, $ or €."
+    },
+    "psu_rating": {
+      "label": "PSU efficiency rating",
+      "description": "Your power supply's 80 Plus or Cybenetics rating. Dynamo uses its efficiency curve to turn component watts into watts at the wall.",
+      "options": {
+        "bronze": "Bronze",
+        "silver": "Silver",
+        "gold": "Gold",
+        "platinum": "Platinum",
+        "titanium": "Titanium / Cybenetics Diamond",
+        "fixed": "Fixed efficiency"
+      }
+    },
+    "psu_efficiency": {
+      "label": "PSU efficiency (%)",
+      "description": "Used at every load, for a PSU without a rating or one you have measured."
+    },
+    "psu_watts": {
+      "label": "PSU wattage (W)",
+      "description": "The rated output, e.g. 1000 for an RM1000x. Efficiency depends on load as a share of this, and drops at low loads."
+    },
+    "mains": {
+      "label": "Mains voltage",
+      "description": "PSUs are 1 to 3 points more efficient on 230 V.",
+      "options": {
+        "230": "230 V (UK, Europe, most of the world)",
+        "115": "115 V (US, Canada, Japan)"
+      }
+    },
+    "rest_watts": {
+      "label": "Rest of the PC (W)",
+      "description": "A fixed allowance for everything without a sensor: motherboard, RAM, drives, fans, RGB and USB devices. 30 to 60 W suits most desktops."
+    },
+    "warn_watts": {
+      "label": "Warning colour from (W)",
+      "description": "The bar number turns the tertiary colour at this draw. 0 turns it off."
+    },
+    "high_watts": {
+      "label": "High colour from (W)",
+      "description": "The bar number turns the error colour at this draw. 0 turns it off."
+    }
+  }
+}

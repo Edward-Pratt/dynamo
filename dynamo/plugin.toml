@@ -1,0 +1,130 @@
+# Dynamo: the PC's estimated power draw at the wall on the bar, with a breakdown by
+# component, a history graph and energy cost over time.
+#
+# Software can measure the CPU package (RAPL) and the discrete GPU (nvidia-smi or
+# amdgpu), but nothing reports the motherboard, RAM, drives, fans or PSU losses. So the
+# total is an estimate: (CPU + GPU + a fixed allowance for the rest) / PSU efficiency,
+# with efficiency taken from the PSU's 80 Plus curve at the current load (efficiency.luau).
+id = "edward/dynamo"
+name = "Dynamo"
+version = "0.1.0"
+# 43 (noctalia 5.4): the surface_container colour roles. 24: argv processes. 22: requires.
+plugin_api = 43
+author = "edward"
+license = "MIT"
+# nvidia-smi is optional and checked at run time; without any GPU sensor the GPU counts as 0.
+dependencies = []
+tags = ["system", "power", "monitor", "bar", "panel", "service"]
+icon = "bolt"
+description = "Your PC's estimated power draw at the wall: CPU and GPU measured, the rest estimated, with a history graph and the cost over time."
+
+# What one kWh costs. Costs are added at the price in effect at the time.
+[[setting]]
+key = "price_per_kwh"
+type = "double"
+label_key = "settings.price_per_kwh.label"
+description_key = "settings.price_per_kwh.description"
+default = 0.245
+min = 0.0
+max = 100.0
+
+[[setting]]
+key = "currency"
+type = "string"
+label_key = "settings.currency.label"
+description_key = "settings.currency.description"
+default = "£"
+
+[[setting]]
+key = "psu_rating"
+type = "select"
+label_key = "settings.psu_rating.label"
+description_key = "settings.psu_rating.description"
+default = "gold"
+options = [
+  { value = "bronze", label_key = "settings.psu_rating.options.bronze" },
+  { value = "silver", label_key = "settings.psu_rating.options.silver" },
+  { value = "gold", label_key = "settings.psu_rating.options.gold" },
+  { value = "platinum", label_key = "settings.psu_rating.options.platinum" },
+  { value = "titanium", label_key = "settings.psu_rating.options.titanium" },
+  { value = "fixed", label_key = "settings.psu_rating.options.fixed" },
+]
+
+[[setting]]
+key = "psu_efficiency"
+type = "int"
+label_key = "settings.psu_efficiency.label"
+description_key = "settings.psu_efficiency.description"
+default = 88
+min = 50
+max = 99
+visible_when = { key = "psu_rating", values = ["fixed"] }
+
+[[setting]]
+key = "psu_watts"
+type = "int"
+label_key = "settings.psu_watts.label"
+description_key = "settings.psu_watts.description"
+default = 850
+min = 200
+max = 3000
+visible_when = { key = "psu_rating", values = ["bronze", "silver", "gold", "platinum", "titanium"] }
+
+[[setting]]
+key = "mains"
+type = "select"
+label_key = "settings.mains.label"
+description_key = "settings.mains.description"
+default = "230"
+options = [
+  { value = "230", label_key = "settings.mains.options.230" },
+  { value = "115", label_key = "settings.mains.options.115" },
+]
+visible_when = { key = "psu_rating", values = ["bronze", "silver", "gold", "platinum", "titanium"] }
+
+# Everything without a sensor: motherboard, RAM, drives, fans, RGB, USB devices.
+[[setting]]
+key = "rest_watts"
+type = "int"
+label_key = "settings.rest_watts.label"
+description_key = "settings.rest_watts.description"
+default = 40
+min = 0
+max = 500
+
+[[setting]]
+key = "warn_watts"
+type = "int"
+label_key = "settings.warn_watts.label"
+description_key = "settings.warn_watts.description"
+default = 300
+min = 0
+max = 5000
+
+[[setting]]
+key = "high_watts"
+type = "int"
+label_key = "settings.high_watts.label"
+description_key = "settings.high_watts.description"
+default = 500
+min = 0
+max = 5000
+
+[[service]]
+id = "service"
+entry = "service.luau"
+
+[[widget]]
+id = "widget"
+entry = "widget.luau"
+[widget.actions]
+  left = "panel-toggle edward/dynamo:panel"
+
+[[panel]]
+id = "panel"
+entry = "panel.luau"
+width = 400
+height = 790
+placement = "attached"
+open_near_click = true
+dismiss_on_outside_click = true
