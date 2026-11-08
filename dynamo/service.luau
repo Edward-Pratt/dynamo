@@ -54,6 +54,7 @@ local function publishPower(now, cpuW, gpuW, e)
     loss = e.loss,
     efficiency = e.efficiency,
     load = e.load,
+    fixedEfficiency = cfg.psu.rating == "fixed",
     cpu = cpuW,
     gpu = gpuW,
     rest = cfg.rest,
@@ -77,6 +78,14 @@ end
 noctalia.setUpdateInterval(TICK_MS)
 function update()
   local now = noctalia.nowMs()
+  if lastTick and now - lastTick > MAX_GAP_MS then
+    -- Back from sleep: RAPL's first delta spans the whole gap (or a counter reset), so
+    -- drop this tick and let it re-prime. The gap counts no energy and the rings fill
+    -- it with zeros on the next push.
+    lastTick = now
+    cpu.read(now)
+    return
+  end
   gpu.ensure()
   local cpuW, gpuW = cpu.read(now), gpu.read(now)
   local warming = now - startedAt < WARMUP_MS

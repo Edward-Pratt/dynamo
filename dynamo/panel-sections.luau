@@ -54,7 +54,8 @@ function M.components(ctx)
   local p = ctx.S.power
   local cpuNote = p.cpuSource and CPU_NOTES[p.cpuSource] or "No sensor found, counted as 0"
   local gpuNote = p.gpuSource and `Measured: {p.gpuSource}` or "No discrete GPU sensor, counted as 0"
-  local lossNote = `{fmt.percent(p.efficiency)} efficient at {fmt.percent(p.load)} of the PSU's rating`
+  local lossNote = p.fixedEfficiency and `{fmt.percent(p.efficiency)} efficient (fixed)`
+    or `{fmt.percent(p.efficiency)} efficient at {fmt.percent(p.load)} of the PSU's rating`
   return ui.column({ gap = 8 }, {
     title("By component"),
     component("CPU", cpuNote, p.cpu, p.wall),

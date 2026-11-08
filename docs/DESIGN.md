@@ -79,4 +79,9 @@ is lost to a crash.
 - **Estimate, not just CPU + GPU.** The measured parts alone read 40-80 W under the wall.
   The allowance and PSU curve are visible in the panel, so the estimate is honest.
 - **Cost stored per day at the time's price.** A price change applies forward only.
-- **Energy counted only while ticks arrive.** A gap over 10 s (suspend) counts nothing.
+- **Energy counted only while ticks arrive.** A gap over 10 s (suspend) counts nothing,
+  and the first tick after it is dropped so RAPL re-primes instead of averaging over the
+  gap.
+- **Calendar maths at noon.** Luau's `os.time(table)` reads the table as UTC while the
+  tests' Lua 5.4 reads it as local time. Anchoring every day at 12:00 keeps both on the
+  same local date except at offsets of 12 h or more.

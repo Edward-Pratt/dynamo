@@ -42,11 +42,11 @@
     },
     "warn_watts": {
       "label": "Warning colour from (W)",
-      "description": "The bar number turns the tertiary colour at this draw. 0 turns it off."
+      "description": "The bar number takes your theme's accent colour from this draw. 0 turns it off."
     },
     "high_watts": {
       "label": "High colour from (W)",
-      "description": "The bar number turns the error colour at this draw. 0 turns it off."
+      "description": "The bar number turns your theme's warning red from this draw. 0 turns it off."
     }
   }
 }
