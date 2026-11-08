@@ -21,7 +21,9 @@ dynamo/
   history.luau          bucketed ring for the graph (pure)
   format.luau           watts, kWh, money, colours (pure)
   widget.luau           bar widget
-  panel.luau            panel shell: state, view state, lifecycle
+  panel.luau            the dropdown panel entry (attached to the widget)
+  panel-pin.luau        the pinned panel entry (persistent, floating; top layer)
+  panel-view.luau       shared panel view: state, view state, lifecycle, pin button
   panel-graph.luau      history graph with range tabs and hover readout
   panel-sections.luau   header, components, energy and cost
 ```

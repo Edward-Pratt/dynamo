@@ -49,9 +49,10 @@ end)
 noctalia.state.watch("energy", function(v) energy = v end)
 
 -- `noctalia msg plugin edward/dynamo:widget <output> click` opens the panel at this
--- widget, for keybinds.
+-- widget; `... pin` opens or closes the pinned panel. For keybinds.
 function onIpc(event)
   if event == "click" then noctalia.togglePanel("edward/dynamo:panel") end
+  if event == "pin" then noctalia.togglePanel("edward/dynamo:pin") end
 end
 noctalia.state.watch("settings", function(v)
   settings = v or {}

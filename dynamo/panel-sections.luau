@@ -21,7 +21,8 @@ local function openSettings()
   noctalia.openSettings()
 end
 
-function M.header(ctx)
+-- `extra` is a button placed before the settings button (pin / unpin).
+function M.header(ctx, extra)
   local p, s, e = ctx.S.power, ctx.S.settings or {}, ctx.S.energy
   local role = fmt.loadRole(p.wall, s.warn, s.high)
   local sub = "Estimated draw at the wall"
@@ -32,6 +33,7 @@ function M.header(ctx)
       ui.label({ text = fmt.watts(p.wall), fontSize = 26, fontWeight = "bold", color = role }),
       small(sub),
     }),
+    extra,
     ui.button({ glyph = "settings", variant = "ghost", controlSize = "sm",
       tooltip = "Electricity price, PSU and colours", onClick = openSettings }),
   })

@@ -7,6 +7,10 @@ Your PC's power draw on the bar, and what it costs.
 - **Panel** (click the widget): the estimate, a graph of the last 10 minutes or 24 hours
   (hover it to read a point), each component's share, and the energy and cost for today,
   this week, this month and all time.
+- **Pinned panel** (the pin button in the panel): a floating copy that stays open while
+  you use other windows, until you unpin it. Pin it on a second monitor to watch it while
+  a game runs fullscreen on the first: noctalia draws persistent panels on the top layer,
+  which a fullscreen window covers.
 
 ## How the estimate works
 
@@ -55,4 +59,4 @@ kept in the plugin's data directory, `ledger.json`.
 ## Keybind
 
 `noctalia msg plugin edward/dynamo:widget <output> click` opens the panel at the widget
-on that output.
+on that output; `... pin` opens or closes the pinned panel.

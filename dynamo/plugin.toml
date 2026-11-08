@@ -128,3 +128,15 @@ height = 790
 placement = "attached"
 open_near_click = true
 dismiss_on_outside_click = true
+
+# The pinned copy: stays open while other windows (a game) have focus, until unpinned.
+# Floating panels sit on noctalia's floating panel layer, overlay by default, so above
+# fullscreen windows.
+[[panel]]
+id = "pin"
+entry = "panel-pin.luau"
+width = 400
+height = 790
+placement = "floating"
+persistent = true
+dismiss_on_outside_click = false
