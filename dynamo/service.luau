@@ -28,6 +28,7 @@ local function publishSettings()
   noctalia.state.set("settings", {
     currency = cfg.currency,
     price = cfg.price,
+    badPrice = cfg.badPrice,
     warn = cfg.warn,
     high = cfg.high,
   })

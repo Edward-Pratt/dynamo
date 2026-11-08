@@ -38,7 +38,7 @@ does not rewrite past days.
 
 | Setting | Default | What it does |
 | --- | --- | --- |
-| Electricity price per kWh | 0.245 | In your currency's main unit (0.245 = 24.5p) |
+| Electricity price per kWh | 0.245 | `0.245`, `£0.245` or `24.5p` (p or c: pence or cents) |
 | Currency symbol | £ | Shown in front of costs |
 | PSU efficiency rating | Gold | Bronze to Titanium, or a fixed efficiency |
 | PSU efficiency (%) | 88 | Only with "Fixed efficiency" |

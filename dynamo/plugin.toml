@@ -18,15 +18,15 @@ tags = ["system", "power", "monitor", "bar", "panel", "service"]
 icon = "bolt"
 description = "Your PC's estimated power draw at the wall: CPU and GPU measured, the rest estimated, with a history graph and the cost over time."
 
-# What one kWh costs. Costs are added at the price in effect at the time.
+# What one kWh costs. Costs are added at the price in effect at the time. Text, parsed by
+# format.parsePrice: noctalia 5.4's settings window saved a decimal typed into a
+# `double` field as 0.0.
 [[setting]]
-key = "price_per_kwh"
-type = "double"
-label_key = "settings.price_per_kwh.label"
-description_key = "settings.price_per_kwh.description"
-default = 0.245
-min = 0.0
-max = 100.0
+key = "price"
+type = "string"
+label_key = "settings.price.label"
+description_key = "settings.price.description"
+default = "0.245"
 
 [[setting]]
 key = "currency"

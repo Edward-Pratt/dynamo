@@ -1,8 +1,8 @@
 {
   "settings": {
-    "price_per_kwh": {
+    "price": {
       "label": "Electricity price per kWh",
-      "description": "In your currency's main unit, e.g. 0.245 for 24.5p. A new price applies from the moment you set it; past costs keep the price they were counted at."
+      "description": "e.g. 0.245, £0.245 or 24.5p (p or c means pence or cents). A new price applies from the moment you set it; past costs keep the price they were counted at."
     },
     "currency": {
       "label": "Currency symbol",

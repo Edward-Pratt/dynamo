@@ -21,6 +21,17 @@ function M.money(v, symbol)
   return s .. string.format("%.2f", v)
 end
 
+-- A typed price per kWh in the currency's main unit, or nil when there is no number.
+-- Takes "0.245", "£0.245", "0,245", and "24.5p" / "24.5c" (pence or cents, / 100).
+function M.parsePrice(text)
+  local s = string.lower(tostring(text or "")):gsub("%s", ""):gsub(",", ".")
+  local num, rest = string.match(s, "(%d*%.?%d+)(.*)$")
+  local v = tonumber(num)
+  if not v then return nil end
+  if string.find(rest, "^[pc]") then v = v / 100 end
+  return v
+end
+
 -- A unit price as set, up to 4 decimals and at least 2: 0.245 -> "£0.245", 0.3 -> "£0.30".
 function M.price(v, symbol)
   local s = string.format("%.4f", v):gsub("0+$", "")

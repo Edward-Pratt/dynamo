@@ -79,6 +79,7 @@ function M.costs(ctx)
   local cur = s.currency or ""
   local since = e.since and `All time (since {fmt.day(e.since)})` or "All time"
   local price = s.price and s.price > 0 and `{fmt.price(s.price, cur)} per kWh` or "No price set: costs show as 0"
+  if s.badPrice then price = `Price "{s.badPrice}" has no number: costs show as 0` end
   return ui.column({ gap = 6 }, {
     title("Energy and cost"),
     costRow("Today", e.today, cur),
